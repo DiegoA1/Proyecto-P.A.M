@@ -1,4 +1,4 @@
-package general;
+package c;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

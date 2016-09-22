@@ -1,4 +1,6 @@
-package general;
+package m;
+
+import c.Archivo;
 
 public class Prueba {
 	public static void main(String[] args) {
