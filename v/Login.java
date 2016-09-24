@@ -171,8 +171,11 @@ public class Login extends javax.swing.JFrame {
     	secuenciaIngresar();
     }                                     
 
-    private void crearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {                                          
-    	new CrearUsuario().setVisible(true);
+    private void crearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {
+    	CrearUsuario crear = new CrearUsuario();
+    	crear.setVisible(true);
+    	this.setVisible(false);
+    	this.dispose();
     }                                         
 
     private void passFieldKeyReleased(java.awt.event.KeyEvent evt) { 
@@ -186,17 +189,17 @@ public class Login extends javax.swing.JFrame {
         	secuenciaIngresar();
     	}
     }                                       
-    private void secuenciaIngresar(){
+    private void secuenciaIngresar(){ 
     	ControlLogin control = new ControlLogin(fieldUsuario.getText(), passField.getPassword());
-		if (control.compUser()){
+    	if(fieldUsuario.getText().length()<=4||passField.getPassword().length<=4){
+			javax.swing.JOptionPane.showMessageDialog(this, "Usuario/Contraseña demasiado cortos",null, javax.swing.JOptionPane.ERROR_MESSAGE, null);
+    	}else if(control.compUser()){
+			Principal ventana = new Principal(fieldUsuario.getText());
+	    	ventana.setVisible(true);
 			this.setVisible(false);
 			this.dispose();
 		} else {
-			javax.swing.JOptionPane.showMessageDialog(this, "Usuario/Contraseña Incorrectos");
+			javax.swing.JOptionPane.showMessageDialog(this, "Usuario/Contraseña Incorrectos",null, javax.swing.JOptionPane.ERROR_MESSAGE, null);
 		}
-    }
-    public static void main(String args[]) {
-    	Login ventana = new Login();
-    	ventana.setVisible(true);
-    }           
+    }          
 }

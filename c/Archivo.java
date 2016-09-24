@@ -7,8 +7,10 @@ import java.io.RandomAccessFile;
 public class Archivo {
 	private RandomAccessFile arch;
 	private String ruta;
+	private Cifrador cifrador;
 	public Archivo(String ruta){
 		this.ruta = ruta;
+		cifrador = Cifrador.getInstance();
 	}
 	public RandomAccessFile getArch() {
 		return arch;
@@ -32,6 +34,7 @@ public class Archivo {
 		} catch (IOException e) {
 			System.out.println("error al leer");
 		}
+		cadenaFinal = cifrador.descifrar("1923", cadenaFinal);
 		return cadenaFinal;
 	}
 	public void escribirArchivo(String linea){
@@ -42,6 +45,7 @@ public class Archivo {
 		}
 		try {
 			arch.setLength(0);
+			linea = cifrador.cifrar("1923", linea);
 			arch.writeBytes(linea);
 			arch.close();
 		} catch (Exception e) {
@@ -49,7 +53,8 @@ public class Archivo {
 		} 
 	}
 	public String[] entregarProcesado(){
-		String[] datos = this.leerArchivo().split("\n");
+		String texto = this.leerArchivo();
+		String[] datos = texto.split("\n");
 		return datos;
 	}
 }
