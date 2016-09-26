@@ -68,14 +68,14 @@ public class Login extends javax.swing.JFrame {
         fieldUsuario.setColumns(16);
         fieldUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldUsuarioKeyReleased(evt);
+                evKeyReleased(evt);
             }
         });
 
         passField.setColumns(16);
         passField.addKeyListener(new java.awt.event.KeyAdapter() {
         	public void keyReleased(java.awt.event.KeyEvent evt) {
-                passFieldKeyReleased(evt);
+                evKeyReleased(evt);
         	}
         });
 
@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
         ingresar.setMinimumSize(new java.awt.Dimension(60, 27));
         ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ingresarMouseClicked(evt);
+                ingresarClick(evt);
             }
         });
 
@@ -97,7 +97,7 @@ public class Login extends javax.swing.JFrame {
         salir.setMinimumSize(new java.awt.Dimension(100, 27));
         salir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salirMouseClicked(evt);
+                salirClick(evt);
             }
         });
 
@@ -106,7 +106,7 @@ public class Login extends javax.swing.JFrame {
         crearUsuario.setText("Crear usuario nuevo");
         crearUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crearUsuarioMouseClicked(evt);
+                crearUsuarioClick(evt);
             }
         });
 
@@ -162,33 +162,27 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void salirMouseClicked(java.awt.event.MouseEvent evt) {
+    private void salirClick(java.awt.event.MouseEvent evt) {
     	this.setVisible(false);
     	this.dispose();
     }                                  
 
-    private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {
+    private void ingresarClick(java.awt.event.MouseEvent evt) {
     	secuenciaIngresar();
     }                                     
 
-    private void crearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {
+    private void crearUsuarioClick(java.awt.event.MouseEvent evt) {
     	CrearUsuario crear = new CrearUsuario();
     	crear.setVisible(true);
     	this.setVisible(false);
     	this.dispose();
     }                                         
 
-    private void passFieldKeyReleased(java.awt.event.KeyEvent evt) { 
+    private void evKeyReleased(java.awt.event.KeyEvent evt) { 
     	if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         	secuenciaIngresar();
     	}
-    }                                    
-
-    private void fieldUsuarioKeyReleased(java.awt.event.KeyEvent evt) {    
-    	if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        	secuenciaIngresar();
-    	}
-    }                                       
+    }                                     
     private void secuenciaIngresar(){ 
     	ControlLogin control = new ControlLogin(fieldUsuario.getText(), passField.getPassword());
     	if(fieldUsuario.getText().length()<=4||passField.getPassword().length<=4){

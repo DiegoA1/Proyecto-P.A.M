@@ -38,14 +38,14 @@ public class ControlLogin {
 	public boolean comprobarDatos(){
 		if(pass.equals(pass2)&&(user.length()>4 && pass.length()>4)&&!buscarUser()){
 			return true;
-		}else if(!pass.equals(pass2)){
-			javax.swing.JOptionPane.showMessageDialog(null, "Las contraseñas son distintas",null,javax.swing.JOptionPane.ERROR_MESSAGE);
+		}else if(buscarUser()){
+			javax.swing.JOptionPane.showMessageDialog(null, "El usuario ya existe", null, javax.swing.JOptionPane.ERROR_MESSAGE);
 		}else if(user.length()<=4){
 			javax.swing.JOptionPane.showMessageDialog(null, "El usuario es muy corto",null,javax.swing.JOptionPane.ERROR_MESSAGE);
 		}else if(pass.length()<=4){
 			javax.swing.JOptionPane.showMessageDialog(null, "La contraseña es muy corta",null,javax.swing.JOptionPane.ERROR_MESSAGE);
-		}else if(buscarUser()){
-			javax.swing.JOptionPane.showMessageDialog(null, "El usuario ya existe", null, javax.swing.JOptionPane.ERROR_MESSAGE);
+		}else if(!pass.equals(pass2)){
+			javax.swing.JOptionPane.showMessageDialog(null, "Las contraseñas son distintas",null,javax.swing.JOptionPane.ERROR_MESSAGE);
 		}
 		return false;
 	}

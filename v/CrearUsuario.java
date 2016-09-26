@@ -1,7 +1,9 @@
 package v;
+
 import java.awt.event.KeyEvent;
 
 import c.*;
+
 public class CrearUsuario extends javax.swing.JFrame {
 	private static final long serialVersionUID = 597936362306316356L;
 	private javax.swing.JButton cancelar;
@@ -40,43 +42,43 @@ public class CrearUsuario extends javax.swing.JFrame {
 
 		fieldUsuario.setColumns(16);
 		fieldUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                enterKeyPressed(evt);
-            }
-        });
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				enterKeyReleased(evt);
+			}
+		});
 
 		passField.setColumns(16);
 		passField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-            	enterKeyPressed(evt);
-            }
-        });
-		
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				enterKeyReleased(evt);
+			}
+		});
+
 		jLabel3.setText("Contraseña:");
 
 		passField2.setColumns(16);
 		passField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-            	enterKeyPressed(evt);
-            }
-        });
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				enterKeyReleased(evt);
+			}
+		});
 		jLabel4.setText("Vuelva a ingresar Contraseña:");
 
 		crear.setText("Crear");
 		crear.setMaximumSize(new java.awt.Dimension(60, 27));
 		crear.setMinimumSize(new java.awt.Dimension(60, 27));
 		crear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crearMouseClicked(evt);
-            }
-        });
-		
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				crearClick(evt);
+			}
+		});
+
 		cancelar.setText("Cancelar");
 		cancelar.setMaximumSize(new java.awt.Dimension(60, 27));
 		cancelar.setMinimumSize(new java.awt.Dimension(60, 27));
 		cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				cancelarMouseClicked(evt);
+				cancelarClick(evt);
 			}
 		});
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
@@ -221,25 +223,27 @@ public class CrearUsuario extends javax.swing.JFrame {
 		pack();
 	}
 
-	private void crearMouseClicked(java.awt.event.MouseEvent evt) {
+	private void crearClick(java.awt.event.MouseEvent evt) {
 		secuenciaUsuario();
 	}
-	private void enterKeyPressed(java.awt.event.KeyEvent evt) {                                         
-		if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        	secuenciaUsuario();
-    	}
-    }                                        
-	
-	private void cancelarMouseClicked(java.awt.event.MouseEvent evt){
+
+	private void enterKeyReleased(java.awt.event.KeyEvent evt) {
+		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+			secuenciaUsuario();
+		}
+	}
+
+	private void cancelarClick(java.awt.event.MouseEvent evt) {
 		Login ventana = new Login();
 		ventana.setVisible(true);
 		this.setVisible(false);
 		this.dispose();
 	}
-	
-	private void secuenciaUsuario(){
-		ControlLogin control = new ControlLogin(fieldUsuario.getText(),passField.getPassword(),passField2.getPassword());
-		if(control.comprobarDatos()){
+
+	private void secuenciaUsuario() {
+		ControlLogin control = new ControlLogin(fieldUsuario.getText(),
+				passField.getPassword(), passField2.getPassword());
+		if (control.comprobarDatos()) {
 			control.guardarUser();
 			Login ventana = new Login();
 			ventana.setVisible(true);

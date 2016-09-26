@@ -91,23 +91,25 @@ public class BaseDatos {
 	public void eliminarFila(int id) {
 		conectar();
 		try {
-			cmd.executeUpdate("DELETE FROM principal WHERE id = " + id + ";");
+			cmd.executeUpdate("DELETE FROM "+usuario+" WHERE id = " + id + ";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		close();
 	}
 	public int lastSaldo(){
-		conectar();
 		int lastSaldo = 0;
-		try {
-			rs = cmd.executeQuery("SELECT id, saldo FROM "+usuario+" ORDER BY id DESC LIMIT 1");
-			rs.next();
-			lastSaldo = rs.getInt("saldo");
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(getCantFilas()!=0){
+			conectar();
+			try {
+				rs = cmd.executeQuery("SELECT id, saldo FROM "+usuario+" ORDER BY id DESC LIMIT 1");
+				rs.next();
+				lastSaldo = rs.getInt("saldo");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close();
 		}
-		close();
 		return lastSaldo;
 	}
 	public Object[] entregarFila(int id){
@@ -129,10 +131,10 @@ public class BaseDatos {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if(desc == null){
+		if(desc.equals("null")){
 			desc = "";
 		}
-		if(dest == null){
+		if(dest.equals("null")){
 			dest = "";
 		}
 		Object[] objeto = {desc,dest,ingreso,egreso,saldo};
@@ -147,7 +149,6 @@ public class BaseDatos {
 			rs.next();
 			x = rs.getInt(1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		close();
