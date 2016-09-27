@@ -12,12 +12,6 @@ public class Archivo {
 		this.ruta = ruta;
 		cifrador = Cifrador.getInstance();
 	}
-	public RandomAccessFile getArch() {
-		return arch;
-	}
-	public void setArch(RandomAccessFile arch) {
-		this.arch = arch;
-	}
 	public String leerArchivo(){
 		String cadena;
 		String cadenaFinal = "";
